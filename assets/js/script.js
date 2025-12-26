@@ -504,12 +504,15 @@ document.addEventListener('DOMContentLoaded', function() {
         message += `(Favor de contactarme para confirmar pedido y forma de pago)`;
         
         // Codificar el mensaje para URL
-        const encodedMessage = encodeURIComponent(message);
-        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+        //const encodedMessage = encodeURIComponent(message);
+        // const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
         
         // Abrir WhatsApp
-        window.open(whatsappUrl, '_blank');
+        // window.open(whatsappUrl, '_blank');
         
+        const whatsappUrl = `whatsapp://send?phone=${phoneNumber}&text=${encodedMessage}`;
+window.location.href = whatsappUrl;
+
         // Cerrar modal
         pizzaModal.style.display = 'none';
         

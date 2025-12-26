@@ -457,12 +457,12 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Actualizar estado del botón de enviar
     function updateSendButton() {
-        sendWhatsApp.disabled = !userLocation || selectedPizzas.length === 0;
-    }
+    sendWhatsApp.disabled = !userLocation;
+}
     
     // Enviar mensaje por WhatsApp con múltiples pizzas
     sendWhatsApp.addEventListener('click', function() {
-        if (!userLocation || selectedPizzas.length === 0) return;
+        if (!userLocation) return;
         
         const lat = userLocation.lat;
         const lng = userLocation.lng;

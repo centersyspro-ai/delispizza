@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>o´sPizza | Las Mejores Pizzas Artesanales</title>
+    <meta name="description" content="Delis Pizza - 20 años llevando deliciosa pizza a su mesa. Pizzas artesanales, servicio en local y a domicilio. Pedidos por Whatsapp.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Manifest para PWA -->
+    <link rel="manifest" href="assets/js/manifest.json">
+    <style>
+        /* Variables CSS para pizzas */
+        :root {
+            --primary-color: #D32F2F; /* Rojo pizzas */
+            --secondary-color: #FF9800; /* Naranja */
+            --accent-color: #4CAF50; /* Verde */
+            --text-color: #333333;
+            --light-color: #f8f8f8;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        /* Reset y estilos base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--white);
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-color);
+            margin: 0.5rem auto;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 700;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        /* Header */
+        header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            width: 60px;
+            height: 60px;
+            margin-right: 10px;
+            border-radius: 50%;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--white);
+        }
+
+        .logo-text span {
+            color: var(--secondary-color);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-menu li {
+            margin-left: 1.5rem;
+        }
+
+        .nav-menu a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 700;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-menu a:hover {
+            color: var(--secondary-color);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--secondary-color);
+            transition: var(--transition);
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: var(--white);
+            margin: 5px;
+            transition: var(--transition);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            margin-top: 80px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .highlight {
+            color: var(--secondary-color);
+            font-weight: 700;
+        }
+
+        /* About Section */
+        .about {
+            background-color: var(--light-color);
+        }
+
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+            padding-right: 2rem;
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+
+        .about-image img {
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+        }
+
+        .about-image img:hover {
+            transform: scale(1.02);
+        }
+
+        /* Menu Section */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-item {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .menu-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .menu-image {
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .menu-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .menu-item:hover .menu-image img {
+            transform: scale(1.05);
+        }
+
+        .menu-content {
+            padding: 1.5rem;
+        }
+
+        .menu-content h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .menu-price {
+            color: var(--secondary-color);
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .menu-ingredients {
+            color: #666;
+            font-size: 0.9rem;
+            margin: 0.5rem 0;
+        }
+
+        /* Specials Section */
+        .specials {
+            background-color: #fff8e1;
+        }
+
+        .specials-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .specials-text {
+            flex: 1;
+            min-width: 300px;
+            padding-right: 2rem;
+        }
+
+        .specials-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+
+        .specials-image img {
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+        }
+
+        .specials-image img:hover {
+            transform: scale(1.02);
+        }
+
+        /* Gallery Section */
+        .gallery {
+            background-color: var(--light-color);
+        }
+
+        .carousel {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        .carousel-track-container {
+            overflow: hidden;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-slide {
+            width: 100%;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .carousel-image {
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+        }
+
+        .carousel-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .carousel-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: var(--white);
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: var(--white);
+            border: none;
+            font-size: 1.5rem;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 10;
+            border-radius: 4px;
+        }
+
+        .carousel-btn:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .carousel-btn.prev {
+            left: 10px;
+        }
+
+        .carousel-btn.next {
+            right: 10px;
+        }
+
+        .carousel-indicators {
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+            gap: 8px;
+        }
+
+        .carousel-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #ccc;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+        }
+
+        .carousel-indicator.active {
+            background-color: var(--primary-color);
+            transform: scale(1.2);
+        }
+
+        .carousel-indicator:hover {
+            background-color: var(--primary-color);
+        }
+
+        /* Map Section */
+        .map-container {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .map-container iframe {
+            display: block;
+            width: 100%;
+            height: 450px;
+            border: none;
+        }
+
+        /* Hours Section */
+        .hours {
+            background-color: var(--light-color);
+        }
+
+        .hours-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hours-table {
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            min-width: 300px;
+        }
+
+        .hours-table h3 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .hours-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .hours-table tr {
+            border-bottom: 1px solid #eee;
+        }
+
+        .hours-table td {
+            padding: 0.8rem 0;
+        }
+
+        .hours-table .day {
+            font-weight: 700;
+            color: var(--text-color);
+        }
+
+        .hours-table .time {
+            text-align: right;
+            color: #666;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h3 {
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 3px;
+            background-color: var(--secondary-color);
+            bottom: -8px;
+            left: 0;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column ul li a {
+            color: var(--white);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--secondary-color);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: var(--secondary-color);
+            color: var(--white);
+            border-radius: 50%;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--white);
+            color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* WhatsApp Button */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            transition: var(--transition);
+            animation: pulse 2s infinite;
+        }
+
+        .whatsapp-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .whatsapp-btn i {
+            font-size: 35px;
+            color: var(--white);
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(37, 211, 102, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+            }
+        }
+
+       /* Modal para pedido de pizza - CORREGIDO PARA SCROLL */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    backdrop-filter: blur(5px);
+    overflow: auto;
+    padding: 20px 0;
+}
+
+.modal-content {
+    background-color: var(--white);
+    margin: 2% auto;
+    padding: 2rem;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+    max-height: 90vh;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    position: relative;
+    animation: modalSlideIn 0.3s ease-out;
+    overflow-y: auto;
+}
+
+/* Asegurarse que el modal se vea bien en móviles */
+@media (max-height: 700px) {
+    .modal-content {
+        margin: 1% auto;
+        max-height: 98vh;
+    }
+}
+
+/* Para pantallas muy pequeñas */
+@media (max-width: 480px) {
+    .modal-content {
+        margin: 0 auto;
+        border-radius: 0;
+        width: 100%;
+        height: 100vh;
+        max-height: 100vh;
+        max-width: 100%;
+    }
+}
+
+        /* Pizza Selection - MODIFICADO PARA MÚLTIPLES SELECCIONES */
+.pizza-options {
+    margin: 1rem 0;
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.pizza-option {
+    padding: 0.8rem;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-bottom: 0.5rem;
+    background: white;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.pizza-option:hover {
+    border-color: var(--primary-color);
+    background-color: #fff5f5;
+}
+
+.pizza-option.selected {
+    border-color: var(--primary-color);
+    background-color: #ffeaea;
+}
+
+.pizza-name {
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 0.3rem;
+    flex: 1;
+    min-width: 200px;
+}
+
+.pizza-desc {
+    font-size: 0.9rem;
+    color: #666;
+    flex-basis: 100%;
+    margin-top: 5px;
+}
+
+.pizza-price {
+    color: var(--secondary-color);
+    font-weight: 700;
+    margin-left: 10px;
+}
+
+.pizza-quantity {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: 15px;
+}
+
+.quantity-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid var(--primary-color);
+    background: white;
+    color: var(--primary-color);
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.quantity-btn:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.quantity-value {
+    min-width: 30px;
+    text-align: center;
+    font-weight: bold;
+}
+
+        /* Estilos para APK/APP */
+        .app-mode .whatsapp-btn {
+            bottom: 80px;
+        }
+
+        .app-mode header {
+            padding-top: env(safe-area-inset-top);
+        }
+
+        @media (display-mode: standalone) {
+            body {
+                padding-top: env(safe-area-inset-top);
+            }
+            
+            .hero {
+                margin-top: calc(80px + env(safe-area-inset-top));
+            }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 1rem 0;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 80px;
+                right: -100%;
+                width: 80%;
+                height: calc(100vh - 80px);
+                background-color: var(--primary-color);
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding-top: 2rem;
+                transition: var(--transition);
+                z-index: 999;
+            }
+
+            .nav-menu.active {
+                right: 0;
+            }
+
+            .nav-menu li {
+                margin: 1.5rem 0;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .hamburger.active div:nth-child(1) {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+
+            .hamburger.active div:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active div:nth-child(3) {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-text, .specials-text {
+                padding-right: 0;
+                margin-bottom: 2rem;
+            }
+
+            .carousel-image {
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .section {
+                padding: 3rem 0;
+            }
+
+            .btn {
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="assets/images/logo-pizza.jpg" alt="Pizzería Don Guiseppe Logo">
+                <div class="logo-text">Delis  <span>Pizza</span></div>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#nosotros">Nosotros</a></li>
+                    <li><a href="#menu">Menú</a></li>
+                    <li><a href="#especialidades">Especialidades</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+                <div class="hamburger">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <h1>Delis Pizza</h1>
+            <p>20 años de tradición en Tula</p>
+            <p>Pizzas artesanales</p>
+            <a href="#menu" class="btn">Ver Menú</a>
+            <a href="javascript:void(0)" class="btn" id="orderHeroBtn" style="margin-left: 10px; background-color: var(--secondary-color);">Pedir Ahora</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section about" id="nosotros">
+        <div class="container">
+            <h2 class="section-title">Nuestra Historia</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Desde 2005, <span class="highlight">Delis Pizza</span> ha sido sinónimo de auténtica pizza italiana. Sus fundadores han mantenido la misma calidad y sabor únicos en Tula.</p>
+                    <p>Nuestra harina, queso mozzarella, y salsa de tomate son de la mejor calidad y nuestro secreto mejor guardado: la masa con nuestra receta secreta.</p>
+                    <p>Todas nuestras pizzas son preparadas a mano y horneadas en horno a altas temperaturas, alcanzando los 450°C que garantizan ese sabor y textura únicos.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1595708684082-a173bb3a06c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Chef preparando pizza" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="section" id="menu">
+        <div class="container">
+            <h2 class="section-title">Nuestro Menú</h2>
+            <div class="menu-grid">
+                <!-- Pizza 1 -->
+                <div class="menu-item">
+                    <div class="menu-image">
+                        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Pizza Margherita" loading="lazy">
+                    </div>
+                    <div class="menu-content">
+                        <h3>Margherita Tradicional</h3>
+                        <div class="menu-price">$199</div>
+                        <div class="menu-ingredients">Salsa de tomate, mozzarella fresca, albahaca, aceite de oliva extra virgen</div>
+                        <button class="btn" style="padding: 8px 20px; font-size: 0.9rem;" data-pizza="Margherita Tradicional" data-price="199">Ordenar</button>
+                    </div>
+                </div>
+                
+                <!-- Pizza 2 -->
+                <div class="menu-item">
+                    <div class="menu-image">
+                        <img src="https://images.unsplash.com/photo-1593246049226-ded77bf90326?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Pizza Pepperoni" loading="lazy">
+                    </div>
+                    <div class="menu-content">
+                        <h3>Pepperoni Especial</h3>
+                        <div class="menu-price">$229</div>
+                        <div class="menu-ingredients">Doble pepperoni, salsa especial, queso mozzarella, orégano</div>
+                        <button class="btn" style="padding: 8px 20px; font-size: 0.9rem;" data-pizza="Pepperoni Especial" data-price="229">Ordenar</button>
+                    </div>
+                </div>
+                
+                <!-- Pizza 3 -->
+                <div class="menu-item">
+                    <div class="menu-image">
+                        <img src="https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Pizza Hawaiana" loading="lazy">
+                    </div>
+                    <div class="menu-content">
+                        <h3>Hawaiana Artesanal</h3>
+                        <div class="menu-price">$219</div>
+                        <div class="menu-ingredients">Jamón de pavo, piña asada, queso mozzarella, salsa BBQ</div>
+                        <button class="btn" style="padding: 8px 20px; font-size: 0.9rem;" data-pizza="Hawaiana Artesanal" data-price="219">Ordenar</button>
+                    </div>
+                </div>
+                
+                <!-- Pizza 4 -->
+                <div class="menu-item">
+                    <div class="menu-image">
+                        <img src="https://images.unsplash.com/photo-1559978137-8c560d91e9e1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Pizza Mexicana" loading="lazy">
+                    </div>
+                    <div class="menu-content">
+                        <h3>Mexicana Picante</h3>
+                        <div class="menu-price">$239</div>
+                        <div class="menu-ingredients">Chorizo, jalapeños, pimiento, cebolla, salsa de chile habanero</div>
+                        <button class="btn" style="padding: 8px 20px; font-size: 0.9rem;" data-pizza="Mexicana Picante" data-price="239">Ordenar</button>
+                    </div>
+                </div>
+                
+                <!-- Pizza 5 -->
+                <div class="menu-item">
+                    <div class="menu-image">
+                        <img src="data:image/jpeg;base64,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" alt="Pizza Vegetariana" loading="lazy">
+                    </div>
+                    <div class="menu-content">
+                        <h3>Vegetariana Fresca</h3>
+                        <div class="menu-price">$219</div>
+                        <div class="menu-ingredients">Champiñones, pimientos, cebolla, aceitunas, espinacas, queso de cabra</div>
+                        <button class="btn" style="padding: 8px 20px; font-size: 0.9rem;" data-pizza="Vegetariana Fresca" data-price="219">Ordenar</button>
+                    </div>
+                </div>
+                
+                <!-- Pizza 6 -->
+                <div class="menu-item">
+                    <div class="menu-image">
+                        <img src="https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Pizza 4 Quesos" loading="lazy">
+                    </div>
+                    <div class="menu-content">
+                        <h3>Cuatro Quesos</h3>
+                        <div class="menu-price">$249</div>
+                        <div class="menu-ingredients">Mozzarella, gorgonzola, parmesano, queso de cabra, miel de abeja</div>
+                        <button class="btn" style="padding: 8px 20px; font-size: 0.9rem;" data-pizza="Cuatro Quesos" data-price="249">Ordenar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Specials Section -->
+    <section class="section specials" id="especialidades">
+        <div class="container">
+            <h2 class="section-title">Especialidades de la Casa</h2>
+            <div class="specials-content">
+                <div class="specials-text">
+                    <h3>Pizza Don Guiseppe</h3>
+                    <p>Nuestra pizza insignia, creada por el chef fundador. Combina lo mejor de Italia con sabores mexicanos.</p>
+                    <p><strong>Ingredientes exclusivos:</strong> Jamón serrano, chorizo ibérico, champiñones portobello, trufa negra, queso manchego y nuestro toque secreto: miel de maguey.</p>
+                    <p><strong>Precio especial:</strong> $299 (solo por tiempo limitado)</p>
+                    <p><strong>Tiempo de preparación:</strong> 15 minutos en nuestro horno de leña tradicional.</p>
+                    <button class="btn" id="specialPizzaBtn" data-pizza="Pizza Don Guiseppe" data-price="299">Ordenar Especialidad</button>
+                </div>
+                <div class="specials-image">
+                    <img src="https://images.unsplash.com/photo-1601924582970-9238bcb495d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Pizza Especial de la Casa" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="section gallery" id="galeria">
+        <div class="container">
+            <h2 class="section-title">Nuestro Local</h2>
+            <div class="carousel">
+                <div class="carousel-track-container">
+                    <div class="carousel-track">
+                        <!-- Slide 1 -->
+                        <div class="carousel-slide">
+                            <div class="carousel-image">
+                                <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Interior de la pizzería">
+                            </div>
+                            <div class="carousel-caption">
+                                <p>Ambiente cálido y familiar para disfrutar en compañía</p>
+                            </div>
+                        </div>
+                        <!-- Slide 2 -->
+                        <div class="carousel-slide">
+                            <div class="carousel-image">
+                                <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Horno de leña tradicional">
+                            </div>
+                            <div class="carousel-caption">
+                                <p>Nuestro horno de leña alcanza 450°C para pizzas perfectas</p>
+                            </div>
+                        </div>
+                        <!-- Slide 3 -->
+                        <div class="carousel-slide">
+                            <div class="carousel-image">
+                                <img src="https://images.unsplash.com/photo-1574126154517-d1e0d89ef734?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Ingredientes frescos">
+                            </div>
+                            <div class="carousel-caption">
+                                <p>Solo utilizamos ingredientes frescos y de la mejor calidad</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-btn prev" aria-label="Slide anterior">&#10094;</button>
+                <button class="carousel-btn next" aria-label="Slide siguiente">&#10095;</button>
+                <div class="carousel-indicators">
+                    <button class="carousel-indicator active" data-index="0" aria-label="Ir al slide 1"></button>
+                    <button class="carousel-indicator" data-index="1" aria-label="Ir al slide 2"></button>
+                    <button class="carousel-indicator" data-index="2" aria-label="Ir al slide 3"></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hours Section -->
+    <section class="section hours">
+        <div class="container">
+            <h2 class="section-title">Horarios de Atención</h2>
+            <div class="hours-content">
+                <div class="hours-table">
+                    <h3>Horario del Restaurante</h3>
+                    <table>
+                        <tr>
+                            <td class="day">Lunes - Jueves</td>
+                            <td class="time">12:00 PM - 10:00 PM</td>
+                        </tr>
+                        <tr>
+                            <td class="day">Viernes - Sábado</td>
+                            <td class="time">12:00 PM - 11:00 PM</td>
+                        </tr>
+                        <tr>
+                            <td class="day">Domingo</td>
+                            <td class="time">12:00 PM - 9:00 PM</td>
+                        </tr>
+                        <tr>
+                            <td class="day">Servicio a Domicilio</td>
+                            <td class="time">Todos los días hasta 30 min antes del cierre</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="section" id="contacto">
+        <div class="container">
+            <h2 class="section-title">Encuéntranos</h2>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d468.4756507872322!2d-99.3426671596358!3d20.058600269185238!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d22d1582f70a19%3A0x1094866677acfa43!2sCuauht%C3%A9moc%2013%2C%20Centro%2C%2042800%20Tula%20de%20Allende%2C%20Hgo.!5e0!3m2!1ses!2smx!4v1766278464764!5m2!1ses!2smx" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Delis Pizza</h3>
+                    <p>20 años llevando deliciosa pizza a </p>
+                    <p>su mesa con la tradición, calidad </p>
+                    <p>y sabor inigualables.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Menú Rápido</h3>
+                    <ul>
+                        <li><a href="#inicio">Inicio</a></li>
+                        <li><a href="#nosotros">Nosotros</a></li>
+                        <li><a href="#menu">Menú</a></li>
+                        <li><a href="#especialidades">Especialidades</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contacto</h3>
+                    <ul>
+                        <li>Teléfono: <a href="tel:+524427128200">442 712 8200</a></li>
+                        <li>WhatsApp: <a href="https://wa.me/524427128200">+52 442 712 8200</a></li>
+                        <li>Dirección: Cuauhtemoc 13, Zona Centro, Tula, Hgo.</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Síguenos</h3>
+                    <div class="social-links">
+                        <a href="" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="" aria-label="TikTok">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; <span id="currentYear"></span> Delis Pizza. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Button -->
+    <div class="whatsapp-btn" id="whatsappBtn" aria-label="Pedir pizza por WhatsApp" role="button" tabindex="0">
+        <i class="fab fa-whatsapp"></i>
+    </div>
+
+   <!-- Modal para pedido de pizza - VERSIÓN MÚLTIPLES PIZZAS -->
+<div id="pizzaModal" class="modal" role="dialog" aria-labelledby="modalTitle" aria-modal="true">
+    <div class="modal-content">
+        <button class="close-modal" aria-label="Cerrar modal">&times;</button>
+        <h3 id="modalTitle">🍕 Pedir Pizza por WhatsApp</h3>
+        
+        <div class="pizza-options">
+            <h4>Selecciona tus pizzas (puedes elegir varias):</h4>
+            <!-- Las opciones se generan dinámicamente con JavaScript -->
+        </div>
+        
+        <div id="orderSummary" style="margin: 1rem 0; padding: 1rem; background: #f5f5f5; border-radius: 8px; display: none;">
+            <h4>📋 Resumen del Pedido:</h4>
+            <div id="selectedPizzasList"></div>
+            <div id="totalPrice" style="margin-top: 10px; padding-top: 10px; border-top: 1px solid #ccc; font-weight: bold; font-size: 1.2rem;"></div>
+        </div>
+        
+        <div class="location-section">
+            <label for="userLocation">📍 Tu ubicación para entrega:</label>
+            <div id="locationStatus" class="location-status">
+                <span id="locationText">Obteniendo ubicación...</span>
+                <div class="location-loading" aria-hidden="true"></div>
+            </div>
+            <button id="getLocationBtn" class="btn-location">🔄 Actualizar Ubicación</button>
+        </div>
+        
+        <div class="message-section">
+            <label for="userMessage">📝 Instrucciones especiales (opcional):</label>
+            <textarea id="userMessage" placeholder="Ejemplo: Sin cebolla, bien cocida, cortada en 8 porciones..."></textarea>
+        </div>
+        
+        <button id="sendWhatsApp" class="btn-send" disabled>
+            📤 Enviar Pedido por WhatsApp ( <span id="itemCount">0</span> items )
+        </button>
+        
+        <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #eee; font-size: 0.9rem; color: #666;">
+            <p><strong>💡 Instrucciones:</strong></p>
+            <ul style="padding-left: 20px; margin-top: 5px;">
+                <li>Haz clic en cualquier pizza para seleccionarla</li>
+                <li>Usa los botones + y - para ajustar la cantidad</li>
+                <li>Puedes seleccionar varias pizzas diferentes</li>
+                <li>El botón de enviar se activará cuando tengas al menos 1 pizza y ubicación</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <!-- JavaScript -->
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
